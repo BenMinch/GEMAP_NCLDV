@@ -101,7 +101,10 @@ This script will generate all sorts of valuable output files showing expression 
 ### Outputs
 1) annotated.csv : a csv that combines your counts and annotation data into one sheet
 2) .png files of heatmaps for each COG functional category
-3) Heatmap of overall expression
-4) nog_categories.csv: Number of genes in each COG category.
-5) top50.csv: list of the top 50 most expressed genes and their average RPKM value
-6) sums.png: A graph of expression over the days of the total genome.
+![Heatmap!](/images/61D.42_rpkm_avgcoenzyme.png)
+
+4) Heatmap of overall expression
+5) nog_categories.csv: Number of genes in each COG category.
+6) top50.csv: list of the top 50 most expressed genes and their average RPKM value
+7) sums.png: A graph of expression over the days of the total genome.
+![Sums!](/images/61D.42_rpkm_avg_sums.png)
