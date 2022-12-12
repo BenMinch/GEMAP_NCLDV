@@ -1,5 +1,5 @@
 # GEMAP_NCLDV
-Genome Mapping Analysis Pipeline for giant viruses (but can also be used for other types of genomes as well. This was designed for use with timescale data (eg. mapping reads to a genome over multiple days/months).
+**GE**nome **M**apping **A**nalysis **P**ipeline for giant viruses (but can also be used for other types of genomes as well. This was designed for use with timescale data (eg. mapping reads to a genome over multiple days/months).
 
 ## Overview of Use
 
