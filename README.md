@@ -1,14 +1,17 @@
-# GEMAP_NCLDV
-**GE**nome **M**apping **A**nalysis **P**ipeline for giant viruses (but can also be used for other types of genomes as well. This was designed for use with timescale data (eg. mapping reads to a genome over multiple days/months).
+# GeMAP_NCLDV
+**Ge**nome **M**apping **A**nalysis **P**ipeline for giant viruses (but can also be used for other types of genomes as well. This was designed for use with timescale data (eg. mapping reads to a genome over multiple days/months).
 
 ## Overview of Use
 
 1) Perform mapping to your desired genome using your mapping tool of choice but make sure you use CoverM for the coverage information. (a mapping script uing bbmap has been provided)
-2) Run post_map_process.py to organize all of your read outputs into a single file.
+2) Run genome_annotation_many.py to map the hits from your hmmsearch to the functions from the annotted database.
 3) Do genome annotations on the genes of your genome (GVOG HMM database and hmmscan was used in this example).
     *If using Hmmscan, you will have to do some additional formatting that will be described later. 
-4) Run genome_annotation_many.py to map the hits from your hmmsearch to the functions from the annotted database.
-5) Run genome_clustermaps.py to get figures of your data as well as summary csv files. 
+4) Run GeMAP.py to get data all organized into one csv file as well as generate figures and clustermaps.
+
+**Alternatively, you can run postmap process and genome clustermaps separately**
+5) Run post_map_process.py to organize all of your read outputs into a single file.
+6) Run genome_clustermaps.py to get figures of your data as well as summary csv files. 
 
 ## 1. Mapping pipeline
 
@@ -33,7 +36,62 @@ Example
 1) Sorted Bam files for all reads (these can be quite large if you have a long time period so I reccommend making a script to delete them)
 2) Coverm output files for each read showing RPKM and count values for each gene. 
 
-## 2. Post map processing
+
+## 2. Genome annotations
+
+### Dependencies
+1) hmmer
+
+### Steps
+1) Download the hmm database of your choice (I used [GVDB](https://zenodo.org/record/4728209/files/GVOGs.tar.gz?download=1)).
+2) Follow instructions from [HMMER](https://www.mankier.com/package/hmmer) to build an hmm and then scan your genomes against it.
+3) Parse the output file to only include best hits with this line of code
+`awk '!x[$3]++' MYOUTFILE.pfam  > MYBESTHITS.pfam`
+4) You will still have to do some editing of the resulting spreadsheets in order to get them ready. The final product should be a 2 column spreadsheet wth one  column being the 'query' and the other being the 'Hit'. 
+
+## 3. Using Genome_annotation_many.py
+
+Inputs
+1) Directory with all your formatted spreadsheets (space separated) from above step (4).
+2) An annotation tsv file (this comes with most hmms that you download and it has functional information). 
+For the GVDB, this file is called gvog.complete.annot.tsv.
+
+Usage
+`python genome_annotation_many.py input_directory gvog.complete.annot.tsv`
+
+Output
+1) This will map the functions to your annotation files and save them as .tsv files
+
+## 4. GeMAP
+
+### Dependencies
+1) pandas
+2) seaborn
+3) Matplotlib
+4) numpy
+
+### Inputs
+-c: directory with all coverm files in it
+-r: directory called 'Renamed'
+-ref: reference file for renaming your dates from read name to date name (eg. SRR77893 -> 11/19/2020 ). **NOTE** the read names must be in a column called SRR_run and the date must be in a column called Date
+-com: an empty folder called 'combined'
+-o: sample name
+-a: annotation file from step 3 (TSV)
+-cat: a list of NOG categories you want to generate figures for.[List of COG categories](http://clovr.org/docs/clusters-of-orthologous-groups-cogs/)
+
+### example
+`python GeMAP.py -c Coverm -r Renamed -ref reffile.csv -com Combined -o sample_62 -a 62_annotation.tsv -cat K,L,M,O`
+
+### Outputs
+1) sample_62.csv: A file with all of your reads in order of date and averaged if there were multiples for each day.
+2) sample_62_annotated.csv: A file with all counts and annotations on one csv.
+3) sample_62_nogcategories.csv: A file with counts of how many genes from each NOG category there were.
+4) sample_62_top.csv: List of top 50 most expressed genes (based on average RPKM or count)
+5) sample_62_total.png: Total clustermap with all gene expression.
+6) sample_62_category.png: clustermap from each category chosen
+7) sample_62_sums.png: expression profile over the time period (line graph).
+
+## Running Post-Map Processing separately
 
 ### Dependencies
 1) python
@@ -58,32 +116,7 @@ This script will take inputs of CoverM files and rename them, sort them by date,
  1) a few useless folders containing renamed files and combined files. (These can be deleted)
  2) A file with all of your reads in order of date and averaged if there were multiples for each day. 
 
-## 3. Genome annotations
-
-### Dependencies
-1) hmmer
-
-### Steps
-1) Download the hmm database of your choice (I used [GVDB](https://zenodo.org/record/4728209/files/GVOGs.tar.gz?download=1)).
-2) Follow instructions from [HMMER](https://www.mankier.com/package/hmmer) to build an hmm and then scan your genomes against it.
-3) Parse the output file to only include best hits with this line of code
-`awk '!x[$3]++' MYOUTFILE.pfam  > MYBESTHITS.pfam`
-4) You will still have to do some editing of the resulting spreadsheets in order to get them ready. The final product should be a 2 column spreadsheet wth one  column being the 'query' and the other being the 'Hit'. 
-
-## 4. Using Genome_annotation_many.py
-
-Inputs
-1) Directory with all your formatted spreadsheets (space separated) from above step (4).
-2) An annotation tsv file (this comes with most hmms that you download and it has functional information). 
-For the GVDB, this file is called gvog.complete.annot.tsv.
-
-Usage
-`python genome_annotation_many.py input_directory gvog.complete.annot.tsv`
-
-Output
-1) This will map the functions to your annotation files and save them as .tsv files
-
-## 5. Generating figures
+## Running Genome_clustermaps separately
 
 ### Dependencies
 1) Seaborn
