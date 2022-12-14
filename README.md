@@ -1,5 +1,7 @@
 # GeMAP_NCLDV
-**Ge**nome **M**apping **A**nalysis **P**ipeline for giant viruses (but can also be used for other types of genomes as well. This was designed for use with timescale data (eg. mapping reads to a genome over multiple days/months).
+**Ge**nome **M**apping **A**nalysis **P**ipeline for giant viruses (but can also be used for other types of genomes as well. This was designed for use with timescale data (eg. mapping reads to a genome over multiple days/months). 
+
+This program can generate large amounts of data in a small amount of time and with little user formatting and knowledge of code. This is meant to be a tool for those who want to quickly look for patterns in expression data. Disclaimer: most of the figures generated will not be publication quality and may need to be reformatted before use. 
 
 ## Overview of Use
 
