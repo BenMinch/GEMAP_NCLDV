@@ -71,13 +71,13 @@ Output
 4) numpy
 
 ### Inputs
--c: directory with all coverm files in it
--r: directory called 'Renamed'
--ref: reference file for renaming your dates from read name to date name (eg. SRR77893 -> 11/19/2020 ). **NOTE** the read names must be in a column called SRR_run and the date must be in a column called Date
--com: an empty folder called 'combined'
--o: sample name
--a: annotation file from step 3 (TSV)
--cat: a list of NOG categories you want to generate figures for.[List of COG categories](http://clovr.org/docs/clusters-of-orthologous-groups-cogs/)
+1. -c: directory with all coverm files in it
+2. -r: directory called 'Renamed'
+3. -ref: reference file for renaming your dates from read name to date name (eg. SRR77893 -> 11/19/2020 ). **NOTE** the read names must be in a column called SRR_run and the date must be in a column called Date
+4. -com: an empty folder called 'combined'
+5. -o: sample name
+6. -a: annotation file from step 3 (TSV)
+7. -cat: a list of NOG categories you want to generate figures for.[List of COG categories](http://clovr.org/docs/clusters-of-orthologous-groups-cogs/)
 
 ### example
 `python GeMAP.py -c Coverm -r Renamed -ref reffile.csv -com Combined -o sample_62 -a 62_annotation.tsv -cat K,L,M,O`
