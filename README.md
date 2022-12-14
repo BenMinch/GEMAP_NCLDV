@@ -12,6 +12,7 @@ This program can generate large amounts of data in a small amount of time and wi
 4) Run GeMAP.py to get data all organized into one csv file as well as generate figures and clustermaps.
 
 **Alternatively, you can run postmap process and genome clustermaps separately**
+
 5) Run post_map_process.py to organize all of your read outputs into a single file.
 6) Run genome_clustermaps.py to get figures of your data as well as summary csv files. 
 
