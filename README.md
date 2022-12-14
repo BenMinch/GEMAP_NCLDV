@@ -92,11 +92,12 @@ Output
 This script will generate all sorts of valuable output files showing expression of different genes during the duration of your study.
 
 ### Inputs
-1) Your combined and renamed reads file from part 2.
-2) Your annotation file from part 4.
+1)-i: Your combined and renamed reads file from part 2. (CSV)
+2) -a:Your annotation file from part 4. (TSV)
+3) -c:COG categories that you want to graph. [List of COG categories](http://clovr.org/docs/clusters-of-orthologous-groups-cogs/)
 
 ### Usage
-`python genome_clustermaps.py combinedreads.csv annotations.tsv`
+`python genome_clustermaps.py -i reads.csv -a annotated_file.tsv -c J,K,L,M,A,C`
 
 ### Outputs
 1) annotated.csv : a csv that combines your counts and annotation data into one sheet
