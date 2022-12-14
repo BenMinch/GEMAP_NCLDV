@@ -106,11 +106,11 @@ This script will take inputs of CoverM files and rename them, sort them by date,
 **IMPORTANT** Doing this will remove the first column (the column containing gene names) from your spreadsheet. You can easily just paste it back from one of the coverM files as the order doesn't change. 
 
 ### Inputs
--c: folder with all CoverM files in it
--r: an empty folder called 'renamed'
--ref: reference file for renaming your dates from read name to date name (eg. SRR77893 -> 11/19/2020 ). **NOTE** the read names must be in a column called SRR_run and the date must be in a column called Date
--com: an empty folder called 'combined'
--o: Output filename (can be anything really)
+1)-c: folder with all CoverM files in it
+2)-r: an empty folder called 'renamed'
+3)-ref: reference file for renaming your dates from read name to date name (eg. SRR77893 -> 11/19/2020 ). **NOTE** the read names must be in a column called SRR_run and the date must be in a column called Date
+4)-com: an empty folder called 'combined'
+5)-o: Output filename (can be anything really)
 
 ### example
 `python Post_mapping_processing.py -c Coverm -r Renamed -ref reffile.csv -com Combined -o Genome_out.csv`
